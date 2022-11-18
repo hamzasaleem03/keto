@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <style>
+      .flex {
+        display: flex;
+      }
+      .flex-dir {
+        flex-direction: column;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .justify-start {
+        justify-content: flex-start;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .items-start {
+        align-items: flex-start;
+      }
+      .w-full {
+        width: 100%;
+      }
+      .h-screen {
+        height: 100vh;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .mainheading {
+        margin-top: 40px;
+      }
+      .color {
+        color: #1e293b;
+      }
+      .mainheading p {
+        text-align: center;
+        color: #1e293b;
+        font-size: 24px;
+      }
+      .mainheading h1 {
+        color: #1e293b;
+        font-size: 24px;
+        text-align: center;
+      }
+      .unittype {
+        margin-top: 50px;
+      }
+      .unittype p {
+        color: #cbd5e1;
+        font-weight: bold;
+      }
+      .mx-auto {
+        margin: auto;
+      }
+      .gap1 {
+        gap: 50px;
+      }
+      .gap {
+        gap: 5px;
+      }
+      .gap130 {
+        gap: 130px;
+      }
+      .gap65 {
+        gap: 65px;
+      }
+      .gap165 {
+        gap: 165px;
+      }
+      .gap80 {
+        gap: 80px;
+      }
+      /* Toogle */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 80px;
+        height: 30px;
+        transform: rotate(180deg);
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 2px solid orange;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 40px;
+        left: 3px;
+        bottom: 2px;
+        /* background-color: white; */
+        background-color: orange;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+      input:checked + .slider {
+        /* background-color: #0f172a; */
+        background-color: white;
+        border: 2px solid #cbd5e1;
+      }
+      input:checked + .slider:before {
+        background-color: #cbd5e1;
+      }
+      input:focus + .slider {
+        box-shadow: 0 0 1px #0f172a;
+      }
+      input:checked + .slider:before {
+        -webkit-transform: translateX(28px);
+        -ms-transform: translateX(28px);
+        transform: translateX(28px);
+      }
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+      .slider.round:before {
+        border-radius: 30%;
+      }
+      .iconbutton {
+        border: none;
+        outline: none;
+        background-color: white;
+        border-radius: 40px;
+        width: 250px;
+        color: #cbd5e1;
+        font-weight: 500;
+      }
+      .iconbuttondiet {
+        border: none;
+        outline: none;
+        background-color: white;
+        border-radius: 40px;
+        width: 150px;
+        color: #cbd5e1;
+        font-weight: 500;
+      }
+      .bg {
+        background-color: #f1f5f9 !important;
+        border-radius: 0 !important;
+        padding: 20px;
+        text-align: center;
+        color: #64748b !important;
+      }
+      .iconbutton:focus {
+        background-color: #f1f5f9;
+      }
+      .bfp1 {
+        color: #525f66 !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        padding-bottom: 20px;
+      }
+      .bmi {
+        color: #a7a7a7 !important;
+        font-size: 15px !important;
+        font-weight: 400 !important;
+      }
+      @media (min-width: 768px) {
+        .pb30 {
+          padding-bottom: 30px;
+        }
+      }
+      @media (max-width: 768px) {
+        .my4 {
+          margin-top: 16px;
+          margin-bottom: 16px;
+        }
+      }
+      @media (max-width: 1200px) {
+        .unittype {
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+        }
+      }
+      @media (max-width: 1199px) {
+        .gap165 {
+          gap: 10px;
+        }
+        .gap130 {
+          gap: 30px;
+        }
+        .gap80 {
+          gap: 30px;
+        }
+        .bfp {
+          flex-wrap: wrap;
+        }
+      }
+      [type="radio"]:checked,
+      [type="radio"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+      }
+      [type="radio"]:checked + label,
+      [type="radio"]:not(:checked) + label {
+        position: relative;
+        padding-left: 65px;
+        cursor: pointer;
+        line-height: 20px;
+        display: inline-block;
+        color: #666;
+      }
+      [type="radio"]:checked + label:before,
+      [type="radio"]:not(:checked) + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 35px;
+        height: 35px;
+        border: 1px solid #ddd;
+        border-radius: 100%;
+        background: #fff;
+      }
+      [type="radio"]:checked + label:after,
+      [type="radio"]:not(:checked) + label:after {
+        content: "";
+        width: 29px;
+        height: 29px;
+        background: orange;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        border-radius: 100%;
+        -webkit-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+      }
+      [type="radio"]:not(:checked) + label:after {
+        opacity: 0;
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+      [type="radio"]:checked + label:after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+      .col {
+        color: #afafaf !important;
+        font-weight: 600 !important;
+        line-height: 30px !important;
+      }
+      .col2 {
+        color: #afafaf !important;
+        font-size: 15px !important;
+        font-weight: unset !important;
+      }
+      .col3 {
+        color: #353535 !important;
+        font-size: 15px !important;
+        font-weight: unset !important;
+        padding-top: 15px;
+      }
+      .calculate {
+        font-size: 12px;
+        cursor: pointer;
+        background: #eb974e;
+        border-bottom: 2px solid #d68239;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: flex;
+        width: 150px;
+        text-align: center;
+        border-radius: 2px;
+        min-height: 50px;
+        justify-content: center;
+        align-items: center;
+        border: none;
+      }
+      .calculate:hover {
+        background: #e9842c;
+      }
+
+      .tool {
+        background-color: orange !important;
+        color: white;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        display: block;
+        z-index: 10;
+        width: 250px;
+        border-radius: 10px;
+        padding: 5px 5px 8px 5px;
+        position: relative;
+        z-index: 10;
+      }
+      .forpos {
+        height: 10px;
+        width: 10px;
+        background-color: orange;
+        position: absolute;
+        left: 50%;
+        right: 0;
+        top: 85%;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+        transform: rotate(45deg);
+      }
+      .bounce {
+        animation: bounce 0.6s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(-25%);
+          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+        }
+        50% {
+          transform: translateY(0);
+          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5 px-4">
+      <div class="flex justify-center items-center">
+        <div class="mainheading">
+          <h1>
+            Starting on a Ketogenic diet? Let's calculate how much you should
+            eat.
+          </h1>
+          <p>
+            We use the information you put in to create an accurate keto
+            nutritions profile for you.
+          </p>
+        </div>
+      </div>
+      <div class="unittype flex flex-wrap justify-start gap1 items-center">
+        <p>
+          WHAT UNIT TYPE DO YOU <br />
+          PREFER?
+        </p>
+        <div class="flex flex-wrap gap1 items-start">
+          <p>METRIC</p>
+          <label class="switch">
+            <input type="checkbox" />
+            <span onclick="toggle();" class="slider round"></span>
+          </label>
+          <p>IMPERIAL</p>
+        </div>
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex flex-wrap justify-start gap130 items-center">
+        <p>
+          YOUR GENDER <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div class="flex flex-wrap gap items-start">
+          <button
+            class="iconbutton flex justify-content-start align-items-center gap-4"
+          >
+            <img
+              style="width: 64px"
+              src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/EuzFxam.png"
+              alt="femaleicon"
+            />
+            FEMALE
+          </button>
+          <br />
+          <button
+            class="iconbutton flex justify-content-start align-items-center gap-4"
+          >
+            <img
+              style="width: 64px"
+              src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/b0Gsv7m.png"
+              alt="maleicon"
+            />
+            MALE
+          </button>
+        </div>
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex flex-wrap justify-start gap80 items-center">
+        <p>
+          HEIGHT AND WEIGHT <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div id="feet" class="flex flex-wrap gap items-start feet">
+          <div style="position: relative">
+            <div style="position: absolute; margin-top: -50px; display: none;" id="one">
+              <div class="tool bounce">
+                <label style="font-size: 13px;"> What is your height in feet?</label>
+                <div class="forpos"></div>
+              </div>
+            </div>
+            <input onfocus="show();" onblur="hide();" type="number" placeholder="Feet" class="iconbutton bg" />
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div style="position: relative">
+            <div style="position: absolute; margin-top: -50px; display: none;" id="two">
+              <div class="tool bounce">
+                <label style="font-size: 13px;"> and in inches?</label>
+                <div class="forpos"></div>
+              </div>
+            </div>
+            <input onfocus="show2();" onblur="hide2();"
+              type="number"
+              placeholder="Inches"
+              class="iconbutton bg my4"
+            />
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <div style="position: relative">
+            <div style="position: absolute; margin-top: -50px; display: none;" id="three">
+              <div class="tool bounce">
+                <label style="font-size: 13px;"> What is your current weight in pounds?
+                </label>
+                <div class="forpos"></div>
+              </div>
+            </div>
+            <input onfocus="show3();" onblur="hide3();" type="number" placeholder="Lbs" class="iconbutton bg" />
+          </div>
+        </div>
+        <!-- functionatlity -->
+        <div
+          id="centi"
+          style="display: none"
+          class="flex flex-wrap gap items-start centi"
+        >
+        <div style="position: relative">
+          <div style="position: absolute; margin-top: -50px; display: none;" id="four">
+            <div class="tool bounce">
+              <label style="font-size: 13px;"> What is your height in centimeters?
+              </label>
+              <div class="forpos"></div>
+            </div>
+          </div>
+          <input onfocus="show4();" onblur="hide4();"
+          type="number"
+          placeholder="Centimeters"
+          class="iconbutton bg"
+        />
+        </div>
+         &nbsp;&nbsp;&nbsp;&nbsp;
+          <div style="position: relative">
+            <div style="position: absolute; margin-top: -50px; display: none;" id="five">
+              <div class="tool bounce">
+                <label style="font-size: 13px;"> What is your current weight in kilograms?
+                </label>
+                <div class="forpos"></div>
+              </div>
+            </div>
+          <input
+          onfocus="show5();" onblur="hide5();"
+          type="number"
+          placeholder="Kilograms"
+          class="iconbutton bg my4"
+        />
+          </div>
+        </div>
+        <!-- end -->
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex flex-wrap justify-start gap165 items-center">
+        <p>
+          YOUR AGE <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div class="flex gap items-start">
+          <div style="position: relative">
+            <div style="position: absolute; margin-top: -50px; display: none;" id="six">
+              <div class="tool bounce">
+                <label style="font-size: 13px;"> What is your current age?
+                </label>
+                <div class="forpos"></div>
+              </div>
+            </div>
+          <input
+          onfocus="show6();" onblur="hide6();"
+          type="number"
+          placeholder="Age"
+          class="iconbutton bg"
+        />
+          </div>
+        </div>
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex bfp justify-start gap65 items-center">
+        <p>
+          BODY FAT PERCENTAGE <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div class="flex gap items-start flex-dir">
+          <p class="bfp1">What is your body fat percentage?</p>
+          <p class="bmi">
+            BMI and body fat are two different measurements. If you don't have
+            calipers or a DEXA machine, use our guide to visually estimate body
+            fat percentage.
+          </p>
+          <input type="number" placeholder="25" class="iconbutton bg" />
+        </div>
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex bfp justify-start gap65 items-center">
+        <p>
+          ACTIVITY LEVEL <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div class="flex gap items-start flex-dir">
+          <p class="bfp1" style="padding-left: 10px">
+            How active are you on a daily basis?
+          </p>
+          <!-- <button class="radio"></button>           -->
+          <form action="#" class="flex bfp gap-4">
+            <div aria-label="one">
+              <div style="padding-bottom: 30px">
+                <img
+                  style="width: 64px; margin-left: 65px; margin-bottom: 15px"
+                  src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/4RWF4Ow.png"
+                  alt="study"
+                />
+                <p>
+                  <input type="radio" id="test1" name="radio-group" checked />
+                  <label class="col" for="test1"
+                    >Sedentary <br />
+                    <span class="col2"
+                      >Not much activity with little to no exercise. Typically a
+                      desk job.</span
+                    ></label
+                  >
+                </p>
+              </div>
+              <div>
+                <img
+                  style="width: 64px; margin-left: 65px; margin-bottom: 15px"
+                  src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/Bp3sjas.png"
+                  alt="study"
+                />
+                <p>
+                  <input type="radio" id="test2" name="radio-group" />
+                  <label class="col" for="test2"
+                    >Lightly Active <br />
+                    <span class="col2"
+                      >Daytime walking with less than 20 minutes exercise per
+                      day. Usually light strolls after meals.
+                    </span></label
+                  >
+                </p>
+              </div>
+            </div>
+            <div aria-label="two">
+              <div style="padding-bottom: 30px">
+                <img
+                  style="width: 64px; margin-left: 65px; margin-bottom: 15px"
+                  src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/Xloh0nv.png"
+                  alt="study"
+                />
+                <p>
+                  <input type="radio" id="test3" name="radio-group" />
+                  <label class="col" for="test3"
+                    >Moderately Active <br />
+                    <span class="col2"
+                      >A lightly active day job with physical labor or scheduled
+                      exercise (i.e. riding your bike to work or lifting a few
+                      times a week).
+                    </span></label
+                  >
+                </p>
+              </div>
+              <div>
+                <img
+                  style="width: 64px; margin-left: 65px; margin-bottom: 15px"
+                  src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/hEQy6Rk.png"
+                  alt="study"
+                />
+                <p>
+                  <input type="radio" id="test4" name="radio-group" />
+                  <label class="col" for="test4"
+                    >Very Active <br />
+                    <span class="col2"
+                      >A very active day job (i.e. construction or industrial
+                      worker) or intense amount of exercise every day.</span
+                    ></label
+                  >
+                </p>
+              </div>
+            </div>
+          </form>
+          <p class="bfp1" style="padding-left: 10px; padding-top: 20px">
+            Add your own custom level
+          </p>
+        </div>
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex bfp justify-start gap65 items-center">
+        <p>
+          DEFICIT / SURPLUS <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div class="flex bfp gap items-start flex-dir">
+          <p class="bfp1">What are your end goals of a ketogenic diet?</p>
+          <form action="#" class="flex bfp gap-4">
+            <div aria-label="one" class="flex gap-5 bfp">
+              <div class="pb30">
+                <p>
+                  <input
+                    onclick="lw();"
+                    type="radio"
+                    id="test7"
+                    name="radio-group"
+                    checked
+                  />
+                  <label class="col" for="test7">Lose Weight</label>
+                </p>
+              </div>
+              <div>
+                <p>
+                  <input
+                    onclick="main();"
+                    type="radio"
+                    id="test5"
+                    name="radio-group"
+                  />
+                  <label class="col" for="test5">Maintain</label>
+                </p>
+              </div>
+              <div class="pb30">
+                <p>
+                  <input
+                    onclick="gm();"
+                    type="radio"
+                    id="test6"
+                    name="radio-group"
+                  />
+                  <label class="col" for="test6">Gain Muscle</label>
+                </p>
+              </div>
+            </div>
+          </form>
+          <div id="lose">
+            <p class="col">How much of a deficit do you want?</p>
+            <input
+              type="number"
+              placeholder="20"
+              class="iconbuttondiet bg"
+            />&nbsp;20%
+            <p class="col" style="margin-top: 40px">
+              It's recommended to never go above a 30% calorie deficit. It's
+              also recommended that you never go above a 15% calorie surplus. If
+              you do, negative results may happen.
+            </p>
+          </div>
+          <div id="gain" style="display: none">
+            <p class="col">How much of a surplus do you want?</p>
+            <input
+              type="number"
+              placeholder="10"
+              class="iconbuttondiet bg"
+            />&nbsp;10%
+            <p class="col" style="margin-top: 40px">
+              It's recommended to never go above a 30% calorie deficit. It's
+              also recommended that you never go above a 15% calorie surplus. If
+              you do, negative results may happen.
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr class="w-full my-5" />
+      <div class="unittype flex bfp justify-start gap65 items-center">
+        <p>
+          CARBS & PROTEIN <br />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-alert-circle"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#cbd5e1"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="12" cy="12" r="9" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+        </p>
+        <div class="flex gap items-start flex-dir">
+          <p class="bfp1">How many carbs do you want to consume?</p>
+          <p class="bmi">
+            It is highly recommended that on a ketogenic diet, you keep your
+            carb intake to 5% or less of total calories. This works out to be an
+            average of 20g net carbs a day.
+          </p>
+          <div class="flex items-center">
+            <input
+              type="number"
+              placeholder="20"
+              class="iconbuttondiet bg"
+            />&nbsp; Net Carbs.
+          </div>
+          <p class="bfp1" style="margin-top: 40px">
+            How much protein do you want to consume?
+          </p>
+          <p class="bmi">
+            Protein shouldn't be over-consumed on a ketogenic diet. If too much
+            is eaten, it could lead to slower weight loss and smaller levels on
+            ketones in the blood.
+          </p>
+          <div
+            class="flex items-center justify-content-between gap-4 w-full bfp"
+            style="margin-top: 40px"
+          >
+            <div class="flex justify-content-center items-center flex-dir">
+              <img
+                style="width: 64px"
+                src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/y3XsYva.png"
+                alt="chair"
+              />
+              <p class="col3">
+                If you're sedentary, we suggest <br />
+                between 0.6g and 0.8g protein.
+              </p>
+            </div>
+            <div class="flex justify-content-center items-center flex-dir">
+              <img
+                style="width: 64px"
+                src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/9HgJVfT.png"
+                alt="chair"
+              />
+              <p class="col3">
+                If you're active, we suggest <br />
+                between 0.8g and 1.0g protein.
+              </p>
+            </div>
+            <div class="flex justify-content-center items-center flex-dir">
+              <img
+                style="width: 64px"
+                src="https://cdn.ruled.me/wp-content/themes/genesis-child/sections/shortcodes/general-img/4pgr4Kq.png"
+                alt="chair"
+              />
+              <p class="col3">
+                If you lift weights, we suggest <br />
+                between 1.0g and 1.2g protein
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-content-between gap-4 w-full bfp"
+            style="margin-top: 20px"
+          >
+            <div>
+              <input
+                type="number"
+                placeholder="0.6"
+                class="iconbuttondiet bg"
+              />&nbsp; g.
+            </div>
+            <button class="calculate">CALCULATE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function lw() {
+        document.getElementById("lose").style.display = "block";
+        document.getElementById("gain").style.display = "none";
+      }
+      function main() {
+        document.getElementById("lose").style.display = "none";
+        document.getElementById("gain").style.display = "none";
+      }
+      function gm() {
+        document.getElementById("lose").style.display = "none";
+        document.getElementById("gain").style.display = "block";
+      }
+      function toggle() {
+        var x = document.getElementById("centi");
+        var y = document.getElementById("feet");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          y.style.display = "none";
+        } else {
+          console.log("hello");
+          x.style.display = "none";
+          y.style.display = "block";
+        }
+      }
+      function show(){
+        document.getElementById("one").style.display="block"
+      }
+      function hide(){
+        document.getElementById("one").style.display="none"
+      }
+      function show2(){
+        document.getElementById("two").style.display="block"
+      }
+      function hide2(){
+        document.getElementById("two").style.display="none"
+      }
+      function show3(){
+        document.getElementById("three").style.display="block"
+      }
+      function hide3(){
+        document.getElementById("three").style.display="none"
+      }
+      function show4(){
+        document.getElementById("four").style.display="block"
+      }
+      function hide4(){
+        document.getElementById("four").style.display="none"
+      }
+      function show5(){
+        document.getElementById("five").style.display="block"
+      }
+      function hide5(){
+        document.getElementById("five").style.display="none"
+      }
+      function show6(){
+        document.getElementById("six").style.display="block"
+      }
+      function hide6(){
+        document.getElementById("six").style.display="none"
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
